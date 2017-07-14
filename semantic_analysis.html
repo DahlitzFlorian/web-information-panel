@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <title>Informations-Panel | Semantische Analysen</title>
+    <meta charset="utf-8">
+</head>
+<body>
+    <header>
+        <div id="logo">
+            Informations-Panel
+        </div>
+        <nav>
+            <ul>
+                <li><a href="file:///P:/python/information-panel/index.html">Startseite</a></li>
+                <li><a href="file:///P:/python/information-panel/semantic_analysis.html">Semantische Analysen</a></li>
+                <li><a href="#">Themen-Recherche</a></li>
+                <li><a href="#">Vorgeschlagene Themen</a></li>
+            </ul>
+        </nav>
+    </header>
+    <article>
+        <h1>Semantische Analysen</h1>
+        <form action="http://localhost:8050">
+            <input type="text" id="term" name="term" value="" placeholder="Begriff - Term">
+            <button id="form_submit" type="submit">Analyse starten</button>
+    </article>
+
+    <!-- Other Scripts -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js" type="text/javascript"></script>
+
+    <!-- Own Script -->
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#form_submit").click(function(){
+                var term = $("#term").val();
+                alert(term);
+            });
+        });
+    </script>
+</body>
+</html>
