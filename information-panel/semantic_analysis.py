@@ -1,7 +1,11 @@
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
-from dash.dependencies import Input, Output
+from dash.dependencies import Input, Output, State
+import os
+
+# global variables
+location = "P:/python/information-panel/"
 
 app = dash.Dash(csrf_protect=False)
 
@@ -19,13 +23,24 @@ app.layout = html.Div(children=[
     ]),
     html.Article(children=[
         html.H1(children="Semantische Analysen"),
-        html.Form(children=[
-            html.Label("Suchbegriff - Term"),
-            dcc.Input(id="term", type="text", value=""),
-            html.Div(children=[], id="some", style={"display":"none"})
-        ], id="sem_ana_form")
+        html.Label("Suchbegriff - Term"),
+        dcc.Input(id="term", type="text", value=""),
+        html.Div(children=[], id="some", style={"display":"none"}),
+        html.Button(value="Suchen", id="submit")
     ])
 ])
+
+@app.callback(
+    Output("some", "children"), 
+    [Input("submit", "n_clicks")],
+    state=[State("term", "value")])
+
+def save_term(n_clicks, term):
+    print(term)
+    for file in os.listdir(location):
+        if os.path.basename(file).endswith(".term"):
+            os.remove(location + file)
+    open(location + term + ".term", "a").close()
 
 if __name__ == "__main__":
     app.run_server(debug=True)
