@@ -7,6 +7,16 @@ import os
 # global variables
 location = "P:/python/information-panel/"
 
+# basic functions
+def delete_term_files():
+    for file in os.listdir(location):
+        if os.path.basename(file).endswith(".term"):
+            os.remove(location + file)
+
+def save_term(n_clicks, term):
+    delete_term_files()
+    open(location + term + ".term", "a").close()
+
 app = dash.Dash(csrf_protect=False)
 
 app.layout = html.Div(children=[
@@ -35,12 +45,10 @@ app.layout = html.Div(children=[
     [Input("submit", "n_clicks")],
     state=[State("term", "value")])
 
-def save_term(n_clicks, term):
-    print(term)
-    for file in os.listdir(location):
-        if os.path.basename(file).endswith(".term"):
-            os.remove(location + file)
-    open(location + term + ".term", "a").close()
+def run_analysis(n_clicks, term):
+    save_term(term)
+    # TODO: Implement analysis
+    delete_term_files()
 
 if __name__ == "__main__":
     app.run_server(debug=True)
