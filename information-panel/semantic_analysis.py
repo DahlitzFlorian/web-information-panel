@@ -13,7 +13,7 @@ def delete_term_files():
         if os.path.basename(file).endswith(".term"):
             os.remove(location + file)
 
-def save_term(n_clicks, term):
+def save_term(term):
     delete_term_files()
     open(location + term + ".term", "a").close()
 
@@ -47,7 +47,6 @@ app.layout = html.Div(children=[
 
 def run_analysis(n_clicks, term):
     save_term(term)
-    # TODO: Implement analysis
     delete_term_files()
 
 if __name__ == "__main__":
